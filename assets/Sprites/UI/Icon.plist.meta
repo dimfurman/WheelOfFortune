@@ -1,0 +1,120 @@
+{
+  "ver": "1.0.6",
+  "importer": "sprite-atlas",
+  "imported": true,
+  "uuid": "8cd6549c-4603-465f-8077-547d52a1a6d6",
+  "files": [
+    ".plist",
+    ".json"
+  ],
+  "subMetas": {
+    "cf0b1": {
+      "importer": "sprite-frame",
+      "uuid": "8cd6549c-4603-465f-8077-547d52a1a6d6@cf0b1",
+      "displayName": "",
+      "id": "cf0b1",
+      "name": "Icon_PictoIcon_Play",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 1,
+        "trimY": 127,
+        "width": 49,
+        "height": 71,
+        "rawWidth": 49,
+        "rawHeight": 71,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "fdabd88d-3b5a-4009-9fb2-5ae76af5f6ce@6c48a",
+        "atlasUuid": "8cd6549c-4603-465f-8077-547d52a1a6d6"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "25aba": {
+      "importer": "sprite-frame",
+      "uuid": "8cd6549c-4603-465f-8077-547d52a1a6d6@25aba",
+      "displayName": "",
+      "id": "25aba",
+      "name": "Icon_PictoIcon_Sound_off",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": true,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 1,
+        "trimY": 1,
+        "width": 67,
+        "height": 61,
+        "rawWidth": 67,
+        "rawHeight": 61,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "fdabd88d-3b5a-4009-9fb2-5ae76af5f6ce@6c48a",
+        "atlasUuid": "8cd6549c-4603-465f-8077-547d52a1a6d6"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "083ca": {
+      "importer": "sprite-frame",
+      "uuid": "8cd6549c-4603-465f-8077-547d52a1a6d6@083ca",
+      "displayName": "",
+      "id": "083ca",
+      "name": "Icon_PictoIcon_Sound_on",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 1,
+        "trimY": 70,
+        "width": 60,
+        "height": 55,
+        "rawWidth": 60,
+        "rawHeight": 55,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "fdabd88d-3b5a-4009-9fb2-5ae76af5f6ce@6c48a",
+        "atlasUuid": "8cd6549c-4603-465f-8077-547d52a1a6d6"
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "atlasTextureName": "Icon.png",
+    "format": 3,
+    "uuid": "8cd6549c-4603-465f-8077-547d52a1a6d6",
+    "textureUuid": "fdabd88d-3b5a-4009-9fb2-5ae76af5f6ce@6c48a"
+  }
+}
