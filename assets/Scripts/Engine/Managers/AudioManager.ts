@@ -7,13 +7,16 @@ const { ccclass, property } = _decorator;
 
 export enum SFXNames {
     ButtonClick = "ButtonClick",
-    UndoCard = "UndoCard"
+    CloseCard = "CloseCard",
+    OpenCard = "OpenCard",
+    Matching = "Matching",
+    Win = "Win"
 }
 
 export enum MusicNames {
-    MusicGame = "MusicGame"
+    Music = "Music"
 }
- 
+
 @ccclass('AudioManager')
 export class AudioManager extends Component implements IGameManager {
     public status: ManagerStatus;
@@ -24,14 +27,18 @@ export class AudioManager extends Component implements IGameManager {
     @property(AudioSource)
     public sfxAudioSource: AudioSource = null!;
 
-    private _sfxVolume = 1;
+    //base music values
+    private readonly _baseSfxVolume = 1;
+    private readonly _baseMusicVolume = 0.6;
+
+    private _sfxVolume=0;
     public get sfxVolume():number{return this._sfxVolume}
     public set sfxVolume(value:number){
         this._sfxVolume = value;
         this.UpdateAudioVolume();
     }
 
-    private _musicVolume = 0.6;
+    private _musicVolume=0;
     public get musicVolume():number{return this._musicVolume}
     public set musicVolume(value:number){
         this._musicVolume = value;
@@ -42,9 +49,12 @@ export class AudioManager extends Component implements IGameManager {
         Managers.Log.WriteLog("Audio manager starting...");
         this.status = ManagerStatus.Initializing;
 
-        this.status = ManagerStatus.Started;
         //update volume
+        this._sfxVolume = this._baseSfxVolume;
+        this._musicVolume = this._baseMusicVolume;
         this.UpdateAudioVolume();
+
+        this.status = ManagerStatus.Started;
     }
 
     //-------Many Exec Sounds-------------------
@@ -76,18 +86,27 @@ export class AudioManager extends Component implements IGameManager {
         this.sfxAudioSource.stop();
     }
 
-    public PauseAllSound (): void {
+    public MuteAllSound (): void {
+        this._sfxVolume = 0;
+        this._musicVolume = 0;
+        this.UpdateAudioVolume();
         // Pause the music
         this.musicAudioSource.pause();
-        //Stop all sounds
-        this.sfxAudioSource.stop();
+    }
+
+    public UnmuteAllSound (): void {
+        this._sfxVolume = this._baseSfxVolume;
+        this._musicVolume = this._baseMusicVolume;
+        this.UpdateAudioVolume();
+        // Pause the music
+        this.PlayMusic();
     }
 
     public PlaySFX (clipName: string, timeToStopMS:number = 0): void {
         let sfx:AudioClip = Managers.GameResources.GetSFX(clipName);
         if(sfx) {
             //stop sfx time
-            if(timeToStopMS != 0){
+            if(timeToStopMS > 0){
                 this.sfxAudioSource.clip = sfx;
                 this.sfxAudioSource.play();
                 setTimeout(()=>{this.StopSFX();},timeToStopMS);
@@ -103,8 +122,8 @@ export class AudioManager extends Component implements IGameManager {
 
     //------------------------
     private UpdateAudioVolume():void{
-        if(this.musicAudioSource) this.musicAudioSource.volume = this._musicVolume;
-        if(this.sfxAudioSource) this.sfxAudioSource.volume = this._sfxVolume;
+        this.musicAudioSource.volume = this._musicVolume;
+        this.sfxAudioSource.volume = this._sfxVolume;
     }
 
 }
