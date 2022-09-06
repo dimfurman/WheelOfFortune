@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, tween, Vec3 } from 'cc';
+import {_decorator, Button, Component, Node, tween, Vec3} from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('PulseButton')
@@ -16,6 +16,9 @@ export class PulseButton extends Component {
     }
 
     onEnable(){
+        let button = this.node.getComponent(Button);
+        if(!button.interactable) return;
+
         if(this.tweenAnim){
             this.tweenAnim.start();
         }

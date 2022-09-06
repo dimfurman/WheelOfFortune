@@ -1,25 +1,32 @@
-
 import { _decorator, Component, log } from 'cc';
 import { IGameManager, ManagerStatus } from './IGameManager';
 import { Managers } from './Managers';
 const { ccclass, property } = _decorator;
 
-
+export enum MetricsEventNames {
+    OnLoadGame= "on-load-game",
+    StartGame = "start-game",
+    FirstPair = "first-pair",
+    SecondPair = "second-pair",
+    FourPair = "four-pair",
+    GameFinish = "game-finish",
+    ClickCtaButton = "click-cta-button"
+}
  
 @ccclass('MetricsManager')
 export class MetricsManager extends Component implements IGameManager {
     public status: ManagerStatus;
-    public weightProcess: number = 10;
 
     public timeInSeconds = 0;
 
-    private isDebug: boolean = false;
+    private _isDebug: boolean = false;
+    private _ymID = "83300000";
 
     Startup(): void {
         Managers.Log.WriteLog("Metrics manager starting...");
         this.status = ManagerStatus.Initializing;
 
-        this.isDebug = Managers.Game.isDebug;
+        this._isDebug = Managers.Game.isDebug;
 
         this.status = ManagerStatus.Started;
     }
@@ -28,22 +35,28 @@ export class MetricsManager extends Component implements IGameManager {
         this.schedule(function() {
             Managers.Metrics.timeInSeconds+=5;
             if(Managers.Metrics.timeInSeconds == 15){
-                Managers.Metrics.ReachGoal("15-second");
-            }     
+                Managers.Metrics.ReachGoal("game-15-second");
+            }
             else if(Managers.Metrics.timeInSeconds == 30){
-                Managers.Metrics.ReachGoal("30-second");
-            }                   
+                Managers.Metrics.ReachGoal("game-30-second");
+            }
             else if(Managers.Metrics.timeInSeconds == 60){
-                Managers.Metrics.ReachGoal("one-minute");
+                Managers.Metrics.ReachGoal("game-one-minute");
             }
             else if(Managers.Metrics.timeInSeconds == 120){
-                Managers.Metrics.ReachGoal("two-minute");
+                Managers.Metrics.ReachGoal("game-two-minute");
             }
-            else if(Managers.Metrics.timeInSeconds == 300){
-                Managers.Metrics.ReachGoal("five-minute");
+            else if(Managers.Metrics.timeInSeconds == 240){
+                Managers.Metrics.ReachGoal("game-four-minute");
+            }
+            else if(Managers.Metrics.timeInSeconds == 360){
+                Managers.Metrics.ReachGoal("game-six-minute");
+            }
+            else if(Managers.Metrics.timeInSeconds == 480){
+                Managers.Metrics.ReachGoal("game-eight-minute");
             }
             else if(Managers.Metrics.timeInSeconds == 600){
-                Managers.Metrics.ReachGoal("ten-minute");
+                Managers.Metrics.ReachGoal("game-ten-minute");
             }
         }, 5);
     }
@@ -51,7 +64,58 @@ export class MetricsManager extends Component implements IGameManager {
     ReachGoal(goalName: string): void{
         Managers.Log.WriteLog("Reach goal: " + goalName);
 
-        if(this.isDebug) return;
+        if(this._isDebug) return;
+
+        //Yandex
+        /*if (typeof ym !== 'undefined') {
+            switch (goalName) {
+                case "on-load-game":
+                    ym(this._ymID,'reachGoal','on-load-game');
+                    break;
+                case "start-game":
+                    ym(this._ymID,'reachGoal','start-game');
+                    break;
+                case "first-pair":
+                    ym(this._ymID,'reachGoal','first-pair');
+                    break;
+                case "second-pair":
+                    ym(this._ymID,'reachGoal','second-pair');
+                    break;
+                case "four-pair":
+                    ym(this._ymID,'reachGoal','four-pair');
+                    break;
+                case "game-finish":
+                    ym(this._ymID,'reachGoal','game-finish');
+                    break;
+                case "click-cta-button":
+                    ym(this._ymID,'reachGoal','click-cta-button');
+                    break;
+                case "game-15-second":
+                    ym(this._ymID,'reachGoal','game-15-second');
+                    break;
+                case "game-30-second":
+                    ym(this._ymID,'reachGoal','game-30-second');
+                    break;
+                case "game-one-minute":
+                    ym(this._ymID,'reachGoal','game-one-minute');
+                    break;
+                case "game-two-minute":
+                    ym(this._ymID,'reachGoal','game-two-minute');
+                    break;
+                case "game-four-minute":
+                    ym(this._ymID,'reachGoal','game-four-minute');
+                    break;
+                case "game-six-minute":
+                    ym(this._ymID,'reachGoal','game-six-minute');
+                    break;
+                case "game-eight-minute":
+                    ym(this._ymID,'reachGoal','game-eight-minute');
+                    break;
+                case "game-ten-minute":
+                    ym(this._ymID,'reachGoal','game-ten-minute');
+                    break;
+            }
+        }*/
 
         //Google
         /*if (typeof gtag !== 'undefined') {

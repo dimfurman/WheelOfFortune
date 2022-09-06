@@ -28,7 +28,8 @@ export class Managers extends Component {
 
     onLoad(){
         //save node between scenes
-        game.addPersistRootNode(this.node);
+        //Only ROOT node can be Persist
+        //game.addPersistRootNode(this.node);
 
         //get links to Mangers
         Managers.Log = this.getComponent("LogManager") as LogManager;
