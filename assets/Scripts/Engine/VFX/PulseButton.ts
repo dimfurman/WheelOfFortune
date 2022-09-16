@@ -12,7 +12,7 @@ export class PulseButton extends Component {
     }
 
     onDisable(){
-        this.tweenAnim.stop;
+        if(this.tweenAnim) {this.tweenAnim.stop;}
     }
 
     onEnable(){

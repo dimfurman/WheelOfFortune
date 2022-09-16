@@ -29,9 +29,11 @@ export class TouchService extends Component {
         let arCollider = PhysicsSystem2D.instance.testPoint(this._touchBeganPos);
         if(arCollider.length>0){
             //search above Node
+            //!!!! ONLY in the same Parent and Layer!!!
             let aboveColleder:Collider2D=null;
             let curIndex = -1;
             for(let collider of arCollider){
+                //collider.group == 2  //collider group check in need
                 if(collider.node.getSiblingIndex() > curIndex){
                     aboveColleder = collider;
                     curIndex = collider.node.getSiblingIndex();

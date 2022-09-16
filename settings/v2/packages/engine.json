@@ -12,7 +12,7 @@
         "_value": true
       },
       "gfx-webgl2": {
-        "_value": false
+        "_value": true
       },
       "3d": {
         "_value": false
@@ -87,6 +87,9 @@
       },
       "dragon-bones": {
         "_value": false
+      },
+      "marionette": {
+        "_value": false
       }
     },
     "includeModules": [
@@ -94,7 +97,7 @@
       "audio",
       "base",
       "gfx-webgl",
-      "marionette",
+      "gfx-webgl2",
       "particle-2d",
       "physics-2d-builtin",
       "tween",
@@ -103,7 +106,8 @@
     "noDeprecatedFeatures": {
       "value": true,
       "version": ""
-    }
+    },
+    "flags": {}
   },
   "macroConfig": {
     "ENABLE_TRANSPARENT_CANVAS": true,

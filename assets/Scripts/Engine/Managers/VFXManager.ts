@@ -12,7 +12,7 @@ export class VFXManager extends Component implements IGameManager{
     public trueEffect: ParticleSystem2D = null!;
 
     Startup(): void {
-        Managers.Log.WriteLog("Audio manager starting...");
+        Managers.Log.WriteLog("VFX manager starting...");
         this.status = ManagerStatus.Started;
     }
 
