@@ -24,7 +24,7 @@ export class LogManager extends Component implements IGameManager {
             let preString = "";
             if(type == LogMessageType.Warning) preString = "!---Warning---!: ";
             else if(type == LogMessageType.Error) preString = "!---Error---!: ";
-            log(preString+message);
+            console.log(preString+message);
         }
     }
 
