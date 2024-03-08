@@ -43,6 +43,9 @@ export class VFXManager extends Component implements IGameManager{
             .repeatForever()
             .start();
     }
+
+    
+
     //-----------------------------------------
 
     ShowTrueEffect(position:Vec3): void{

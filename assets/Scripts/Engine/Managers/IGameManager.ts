@@ -1,7 +1,8 @@
 export enum ManagerStatus {
     Shutdown,
     Initializing,
-    Started
+    Started,
+    Spining
 }
 
 export interface IGameManager {
