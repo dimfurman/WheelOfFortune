@@ -6,7 +6,7 @@ const { ccclass, property } = _decorator;
 export class SpinWheel extends Component {
 
     private static wheel_values = [
-        100,
+        400,
         350,
         300,
         2000,
@@ -32,26 +32,22 @@ export class SpinWheel extends Component {
     }
 
     private static spin_wheel(): void {
+        Managers.Audio.PlaySFX('click');
         let _deg_start: number = Managers.UIManager.WheelIMg.angle;
-        let _fullSpinCount: number = Math.floor(Math.random() * 10);
+        let _fullSpinCount: number = Math.floor(Math.random() * 10) + 2;
         let _spin = _fullSpinCount * 360 + Math.floor(Math.random() * 3600) / 10;
         let _deg_final: number = _deg_start + _spin;
-        this.SpinWheelTween(Managers.UIManager.WheelIMg, _fullSpinCount, _deg_final);
+        _fullSpinCount = _fullSpinCount / 2;
+        Managers.UIManager.SpinWheelTween(Managers.UIManager.WheelIMg, _fullSpinCount, _deg_final);
         setTimeout(() => {
             Managers.Game.currentWin = this.getAward(_deg_final - 360 * Math.floor(_deg_final / 360));
             Managers.Game.endSpin();
-        }, (_fullSpinCount + 2)*500);
-        
+        }, _fullSpinCount * 1000);
+
     }
 
-    private static SpinWheelTween(node: Node, spinCount: number, angTo: number) {
-        tween(node)
-            .to(spinCount + 2, { angle: angTo }, {  // 
-                easing: "quartInOut",                                   // Tween function
-            })
-            .union()
-            .start();
-    }
+
+
 
     private static getAward(a: number): number {
         let ang = 360 / this.wheel_values.length;

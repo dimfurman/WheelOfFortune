@@ -59,10 +59,24 @@ export class UIManager extends Component implements IGameManager {
         soundButtonToggle.ToggleSprite();
 
         if (soundButtonToggle.btnEnabled == false) {
-            Managers.Audio.MuteAllSound();
+            Managers.Audio.MuteAllSFX();
         }
         else {
-            Managers.Audio.UnmuteAllSound();
+            Managers.Audio.UnmuteAllSFX();
+        }
+    }
+
+    MusicButtonClick(event: Event): void {
+        const buttonNode = event.target as Node;
+        const soundButtonToggle = buttonNode.getComponent(SoundButtonToggle);
+
+        soundButtonToggle.ToggleSprite();
+
+        if (soundButtonToggle.btnEnabled == false) {
+            Managers.Audio.MuteMusic();
+        }
+        else {
+            Managers.Audio.UnmuteMusic();
         }
     }
 
@@ -71,7 +85,7 @@ export class UIManager extends Component implements IGameManager {
     }
 
     SpinBtnClick() {
-        if (this.status==ManagerStatus.Started) {
+        if (this.status == ManagerStatus.Started) {
             SpinWheel.SpinWheelCall();
             this.status = ManagerStatus.Spining;
         }
@@ -80,6 +94,7 @@ export class UIManager extends Component implements IGameManager {
     AgainBtnClick(): void {
         this.gameScene.active = true;
         this.finishPopup.active = false;
+        Managers.Game.again();
     }
 
     openFinish(): void {
@@ -94,6 +109,21 @@ export class UIManager extends Component implements IGameManager {
     setLose(): void {
         this.finishLabel.string = "YOU LOSE...";
         this.finishText.string = "Try in another try...";
+    }
+    showAddScoreLabel(node: Label) {
+        tween(node.getComponent(UIOpacity))
+            .to(1, { opacity: 255 },)
+            .to(1, { opacity: 0 },)
+            .start();
+    }
+
+    SpinWheelTween(node: Node, spinCount: number, angTo: number) {
+        tween(node)
+            .to(spinCount, { angle: angTo }, {  // 
+                easing: "quartInOut",                                   // Tween function
+            })
+            .union()
+            .start();
     }
 
 }

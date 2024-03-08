@@ -6,10 +6,10 @@ import {LogMessageType} from "./LogManager";
 const { ccclass, property } = _decorator;
 
 export enum SFXNames {
-    ButtonClick = "ButtonClick",
-    CloseCard = "CloseCard",
-    OpenCard = "OpenCard",
-    Matching = "Matching",
+    click = "click",
+    win = "win",
+    lose = "lose",
+    score = "score",
     Win = "Win"
 }
 
@@ -58,7 +58,7 @@ export class AudioManager extends Component implements IGameManager {
     }
 
     //-------Many Exec Sounds-------------------
-    public PlayButtonClick():void{this.PlaySFX(SFXNames.ButtonClick);}
+    public PlayButtonClick():void{this.PlaySFX(SFXNames.click);}
     //------------------------------------------
 
     public ChangeMusicClip(clipName: string):void{
@@ -86,16 +86,26 @@ export class AudioManager extends Component implements IGameManager {
         this.sfxAudioSource.stop();
     }
 
-    public MuteAllSound (): void {
+    public MuteAllSFX (): void {
         this._sfxVolume = 0;
+        this.UpdateAudioVolume();
+        // Pause the music
+    }
+
+    public UnmuteAllSFX (): void {
+        this._sfxVolume = this._baseSfxVolume;
+        this.UpdateAudioVolume();
+        // Pause the music
+    }
+
+    public MuteMusic (): void {
         this._musicVolume = 0;
         this.UpdateAudioVolume();
         // Pause the music
         this.musicAudioSource.pause();
     }
 
-    public UnmuteAllSound (): void {
-        this._sfxVolume = this._baseSfxVolume;
+    public UnmuteMusic (): void {
         this._musicVolume = this._baseMusicVolume;
         this.UpdateAudioVolume();
         // Pause the music
