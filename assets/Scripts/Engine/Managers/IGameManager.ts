@@ -2,7 +2,7 @@ export enum ManagerStatus {
     Shutdown,
     Initializing,
     Started,
-    Spining
+    Spining// when wheel is spining
 }
 
 export interface IGameManager {

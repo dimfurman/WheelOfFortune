@@ -1,5 +1,5 @@
 
-import {_decorator, Component, Node, ParticleSystem2D, tween, UIOpacity, Vec3} from 'cc';
+import {_decorator, Component, Label, Node, ParticleSystem2D, tween, UIOpacity, Vec3} from 'cc';
 import {IGameManager, ManagerStatus} from "db://assets/Scripts/Engine/Managers/IGameManager";
 import {Managers} from "db://assets/Scripts/Engine/Managers/Managers";
 const { ccclass, property } = _decorator;
@@ -44,7 +44,21 @@ export class VFXManager extends Component implements IGameManager{
             .start();
     }
 
-    
+    showAddScoreLabel(node: Label) { //tween on current win
+        tween(node.getComponent(UIOpacity))
+            .to(1, { opacity: 255 },)
+            .to(1, { opacity: 0 },)
+            .start();
+    }
+
+    SpinWheelTween(node: Node, spinCount: number, angTo: number) { //tween for spining wheel
+        tween(node)
+            .to(spinCount, { angle: angTo }, {  // 
+                easing: "quartInOut",
+            })
+            .union()
+            .start();
+    }
 
     //-----------------------------------------
 

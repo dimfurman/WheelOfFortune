@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, tween } from 'cc';
+import { _decorator, Component } from 'cc';
 import { Managers } from '../Engine/Managers/Managers';
 const { ccclass, property } = _decorator;
 
@@ -24,9 +24,6 @@ export class SpinWheel extends Component {
         3000
     ];
 
-    public static currentAward: number;
-    public static currentTime: number;
-
     public static SpinWheelCall() {
         this.spin_wheel();
     }
@@ -38,16 +35,12 @@ export class SpinWheel extends Component {
         let _spin = _fullSpinCount * 360 + Math.floor(Math.random() * 3600) / 10;
         let _deg_final: number = _deg_start + _spin;
         _fullSpinCount = _fullSpinCount / 2;
-        Managers.UIManager.SpinWheelTween(Managers.UIManager.WheelIMg, _fullSpinCount, _deg_final);
+        Managers.VFXManager.SpinWheelTween(Managers.UIManager.WheelIMg, _fullSpinCount, _deg_final);
         setTimeout(() => {
             Managers.Game.currentWin = this.getAward(_deg_final - 360 * Math.floor(_deg_final / 360));
             Managers.Game.endSpin();
         }, _fullSpinCount * 1000);
-
     }
-
-
-
 
     private static getAward(a: number): number {
         let ang = 360 / this.wheel_values.length;

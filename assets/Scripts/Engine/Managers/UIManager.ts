@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, tween, Vec3, UIOpacity, Button, Label, Color, EditBox, find, Event } from 'cc';
+import { _decorator, Component, Node, Label, Event } from 'cc';
 import { IGameManager, ManagerStatus } from './IGameManager';
 import { Managers } from './Managers';
 import { SoundButtonToggle } from "db://assets/Scripts/Engine/UI/SoundButtonToggle";
@@ -84,14 +84,14 @@ export class UIManager extends Component implements IGameManager {
         this.startPopup.active = false;
     }
 
-    SpinBtnClick() {
+    SpinBtnClick(): void { //click on Spin
         if (this.status == ManagerStatus.Started) {
             SpinWheel.SpinWheelCall();
             this.status = ManagerStatus.Spining;
         }
     }
 
-    AgainBtnClick(): void {
+    AgainBtnClick(): void { //new game
         this.gameScene.active = true;
         this.finishPopup.active = false;
         Managers.Game.again();
@@ -109,21 +109,6 @@ export class UIManager extends Component implements IGameManager {
     setLose(): void {
         this.finishLabel.string = "YOU LOSE...";
         this.finishText.string = "Try in another try...";
-    }
-    showAddScoreLabel(node: Label) {
-        tween(node.getComponent(UIOpacity))
-            .to(1, { opacity: 255 },)
-            .to(1, { opacity: 0 },)
-            .start();
-    }
-
-    SpinWheelTween(node: Node, spinCount: number, angTo: number) {
-        tween(node)
-            .to(spinCount, { angle: angTo }, {  // 
-                easing: "quartInOut",                                   // Tween function
-            })
-            .union()
-            .start();
     }
 
 }
