@@ -19,8 +19,8 @@ export class UIManager extends Component implements IGameManager {
     @property({ type: Node })
     public gameScene: Node = null;
 
-    @property({ type: Node })
-    public WheelIMg: Node = null;
+    @property({ type: SpinWheel })
+    public SpinWheel: SpinWheel = null;
 
     @property({ type: Node })
     public SpinBtn: Node = null;
@@ -85,9 +85,9 @@ export class UIManager extends Component implements IGameManager {
     }
 
     SpinBtnClick(): void { //click on Spin
-        if (this.status == ManagerStatus.Started) {
-            SpinWheel.SpinWheelCall();
-            this.status = ManagerStatus.Spining;
+        if ( Managers.Game.wheelIsSpining == false) {
+            this.SpinWheel.SpinWheelCall();
+            Managers.Game.wheelIsSpining = true;
         }
     }
 

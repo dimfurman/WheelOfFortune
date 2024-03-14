@@ -18,9 +18,6 @@ export class GameManager extends Component implements IGameManager {
         public objectsNode: Node = null; */
 
 
-    @property({ type: Node })
-    private WheelImg = null;
-
     @property({ type: Label })
     public ScoreLabel: Label = null;
 
@@ -33,8 +30,9 @@ export class GameManager extends Component implements IGameManager {
 
     private _tries = 10;
     private _score = 0;
-    private _gamePlayed = 0;
+    private _gamePlayed = 1;
     public currentWin = 0;
+    public wheelIsSpining = false;
 
     Startup(): void {
         Managers.Log.WriteLog("Game manager starting...");
@@ -51,16 +49,15 @@ export class GameManager extends Component implements IGameManager {
 
     endSpin(): void { //when wheel stop
         this.AddScoreLabel.string = '+' + this.currentWin;
-        Managers.VFXManager.showAddScoreLabel(this.AddScoreLabel); //tween show award
         Managers.Audio.PlaySFX('score');
-        setTimeout(() => {
-            this._tries--;
-            this._score += this.currentWin;
-            Managers.UIManager.status = ManagerStatus.Started;
-            this.SpinsLabel.string = 'Spins:' + this._tries;
-            this.ScoreLabel.string = this._score.toString();
-            this.checkIsGameFinish();
-        }, 1000);
+        Managers.VFXManager.showAddScoreLabel(this.AddScoreLabel.node, ()=>{
+                this._tries--;
+                this._score += this.currentWin;
+                this.wheelIsSpining = false; 
+                this.SpinsLabel.string = 'Spins:' + this._tries;
+                this.ScoreLabel.string = this._score.toString();
+                this.checkIsGameFinish();
+        }); //tween show award
     }
 
     checkIsGameFinish(): void {

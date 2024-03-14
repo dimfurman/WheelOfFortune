@@ -7,6 +7,9 @@ export class PulseButton extends Component {
  
     private tweenAnim = null;
 
+    @property
+    public speed: number = 1;
+
     start () {
         this.onEnable();     
     }
@@ -24,8 +27,8 @@ export class PulseButton extends Component {
         }
         else{
             this.tweenAnim=tween(this.node)
-                .to(1, {scale: new Vec3(1.06,1.06,1)})
-                .to(1, {scale: new Vec3(1,1,1)})
+                .to(this.speed/2, {scale: new Vec3(1.06,1.06,1)})
+                .to(this.speed/2, {scale: new Vec3(1,1,1)})
                 .union()
                 .repeatForever()
                 .start();  

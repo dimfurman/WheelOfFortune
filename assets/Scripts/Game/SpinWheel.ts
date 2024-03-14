@@ -5,7 +5,7 @@ const { ccclass, property } = _decorator;
 @ccclass('SpinWheel')
 export class SpinWheel extends Component {
 
-    private static wheel_values = [
+    private wheel_values = [
         400,
         350,
         300,
@@ -24,25 +24,20 @@ export class SpinWheel extends Component {
         3000
     ];
 
-    public static SpinWheelCall() {
-        this.spin_wheel();
-    }
-
-    private static spin_wheel(): void {
+    public SpinWheelCall(): void {
         Managers.Audio.PlaySFX('click');
-        let _deg_start: number = Managers.UIManager.WheelIMg.angle;
+        let _deg_start: number = this.node.angle;
         let _fullSpinCount: number = Math.floor(Math.random() * 10) + 2;
         let _spin = _fullSpinCount * 360 + Math.floor(Math.random() * 3600) / 10;
         let _deg_final: number = _deg_start + _spin;
-        _fullSpinCount = _fullSpinCount / 2;
-        Managers.VFXManager.SpinWheelTween(Managers.UIManager.WheelIMg, _fullSpinCount, _deg_final);
-        setTimeout(() => {
+        _fullSpinCount = _fullSpinCount / 2; //ускорение вращенрия
+        Managers.VFXManager.SpinWheelTween(this.node, _fullSpinCount, _deg_final, () => {
             Managers.Game.currentWin = this.getAward(_deg_final - 360 * Math.floor(_deg_final / 360));
             Managers.Game.endSpin();
-        }, _fullSpinCount * 1000);
+        }); //в колбэк функцию передать ниже
     }
 
-    private static getAward(a: number): number {
+    private getAward(a: number): number {
         let ang = 360 / this.wheel_values.length;
         for (let i = 0; i < 16; i++) {
             if (a < (i + 1) * ang) {
